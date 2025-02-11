@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checking out repo
         uses: actions/checkout@v3
