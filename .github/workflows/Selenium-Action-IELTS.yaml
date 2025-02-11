@@ -23,7 +23,7 @@ jobs:
         run: sudo apt-get install xvfb
 
       - name: Running the Python script
-        run: python Selenium-Template.py ${{ secrets.EMAIL }} ${{ secrets.PASSWORD }} ${{ secrets.MYSITE }}
+        run: python Selenium-Action-IELTS.py ${{ secrets.EMAIL }} ${{ secrets.PASSWORD }} ${{ secrets.MYSITE }}
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
