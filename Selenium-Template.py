@@ -118,5 +118,5 @@ def update_token():
     finally:
         driver.quit()
 
-update_token(driver)
+update_token()
 
