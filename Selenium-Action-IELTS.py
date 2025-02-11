@@ -1,13 +1,16 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import re
-import time
 import logging
-import chromedriver_autoinstaller
+import re
+import sys
+import time
+
+import requests
 from pyvirtualdisplay import Display
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+import chromedriver_autoinstaller
 
 display = Display(visible=0, size=(800, 800))
 display.start()
@@ -25,25 +28,31 @@ chromedriver_autoinstaller.install()  # Check if the current version of chromedr
 
 def update_token():
     """
-    该函数自动化登录IELTS成绩服务网站，获取URL中的认证token，并通过发送到指定API端点来更新token。
-    函数执行的步骤：
-    1. 使用特定选项初始化Chrome WebDriver，以无头模式运行并抑制日志。
-    2. 打开IELTS成绩服务网站。
-    3. 输入邮箱和密码进行登录。
-    4. 点击提交按钮登录。
-    5. 等待URL包含认证token。
-    6. 从URL中提取token。
-    7. 将token发送到指定的API端点进行更新。
-    8. 打印token更新操作的状态。
-    注意：
-    - 确保'chromedriver.exe'在指定路径中可用。
-    - 使用有效的凭据更新邮箱和密码字段。
-    - 根据实际端点要求更新API端点URL。
-    异常：
-    - TimeoutException: 如果在指定等待时间内未找到邮箱或密码字段，或提交按钮。
-    - requests.exceptions.RequestException: 如果HTTP请求更新token时出现问题。
+    This function automates the login to the IELTS results service website, retrieves the authentication token from the URL, and updates the token by sending it to a specified API endpoint.
+    Steps performed by the function:
+    1. Initialize Chrome WebDriver with specific options to run in headless mode and suppress logs.
+    2. Open the IELTS results service website.
+    3. Enter email and password to log in.
+    4. Click the submit button to log in.
+    5. Wait for the URL to contain the authentication token.
+    6. Extract the token from the URL.
+    7. Send the token to the specified API endpoint for updating.
+    8. Print the status of the token update operation.
+    Note:
+    - Ensure 'chromedriver.exe' is available in the specified path.
+    - Update the email and password fields with valid credentials.
+    - Update the API endpoint URL according to actual requirements.
+    Exceptions:
+    - TimeoutException: If the email or password field, or the submit button is not found within the specified wait time.
+    - requests.exceptions.RequestException: If there is an issue with the HTTP request to update the token.
     """
     try:
+
+        # Get email, password, and URL from arguments
+        email = sys.argv[1]
+        password = sys.argv[2]
+        mysite = sys.argv[3]
+
         chrome_options = webdriver.ChromeOptions()
         # Add your options as needed
         options = [
@@ -68,21 +77,21 @@ def update_token():
 
         driver.get("https://results-service.ielts.org/")
 
-        # 输入邮箱
+        # Enter email
         email_field = WebDriverWait(driver, 300).until(
             EC.visibility_of_element_located((By.NAME, "email"))
         )
-        email_field.send_keys("zkielts@163.com")
+        email_field.send_keys(email)
         logging.info("Email entered.")
 
-        # 输入密码
+        # Enter password
         pwd_field = WebDriverWait(driver, 300).until(
             EC.visibility_of_element_located((By.NAME, "password"))
         )
-        pwd_field.send_keys("Abc13717421!")
+        pwd_field.send_keys(password)
         logging.info("Password entered.")
 
-        # 点击登录
+        # Click login
         btn = WebDriverWait(driver, 300).until(
             EC.visibility_of_element_located((By.CLASS_NAME, "auth0-lock-submit"))
         )
@@ -90,7 +99,7 @@ def update_token():
         logging.info("Submit button clicked.")
 
         logging.info("Waiting for token in URL...")
-        timeout = time.time() + 300  # 5分钟超时
+        timeout = time.time() + 300  # 5 minutes timeout
         while time.time() < timeout:
             pattern = (
                 r"https://results-service\.ielts\.org/#id_token=([^&]+)&state=([^&]+)"
@@ -98,11 +107,20 @@ def update_token():
             match = re.search(pattern, driver.current_url)
             if match:
                 id_token = match.group(1)
-                logging.info(f"token={id_token}")
                 break
             time.sleep(0.1)
         else:
             raise TimeoutError("Token retrieval timed out.")
+
+        url = f"{mysite}{id_token}"
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            logging.info("Token updated successfully.")
+        else:
+            logging.error(
+                f"Failed to update token. Status code: {response.status_code}"
+            )
 
     except Exception as e:
         logging.error(f"Error in update_token: {e}")
@@ -110,4 +128,5 @@ def update_token():
         driver.quit()
 
 
-update_token()
+if __name__ == "__main__":
+    update_token()

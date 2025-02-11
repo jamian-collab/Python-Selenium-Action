@@ -18,12 +18,12 @@ jobs:
         
        # Need to fetch reqs if needed
       - name: Installing all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
+        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay requests
       - name: Install xvfb
         run: sudo apt-get install xvfb
 
       - name: Running the Python script
-        run: python Selenium-Template.py
+        run: python Selenium-Template.py ${{ secrets.EMAIL }} ${{ secrets.PASSWORD }} ${{ secrets.MYSITE }}
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
