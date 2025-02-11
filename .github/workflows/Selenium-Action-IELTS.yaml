@@ -1,6 +1,9 @@
 name: Run Selenium On GitHub Action
 on:
   workflow_dispatch:
+  schedule:
+  # Scheduled task to automatically run the Selenium script every 3 hours
+    - cron: '0 */3 * * *'
 jobs:
   scrape:
     runs-on: ubuntu-22.04
