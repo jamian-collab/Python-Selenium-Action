@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -9,7 +8,8 @@ import time
 import logging
 import chromedriver_autoinstaller
 from pyvirtualdisplay import Display
-display = Display(visible=0, size=(800, 800))  
+
+display = Display(visible=0, size=(800, 800))
 display.start()
 
 logging.basicConfig(
@@ -19,31 +19,9 @@ logging.basicConfig(
 )
 
 chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                      # and if it doesn't exist, download it automatically,
-                                      # then add chromedriver to path
+# and if it doesn't exist, download it automatically,
+# then add chromedriver to path
 
-chrome_options = webdriver.ChromeOptions()    
-# Add your options as needed    
-options = [
-  # Define window size here
-   "--window-size=1200,1200",
-    "--ignore-certificate-errors"
- 
-    #"--headless",
-    #"--disable-gpu",
-    #"--window-size=1920,1200",
-    #"--ignore-certificate-errors",
-    #"--disable-extensions",
-    #"--no-sandbox",
-    #"--disable-dev-shm-usage",
-    #'--remote-debugging-port=9222'
-]
-
-for option in options:
-    chrome_options.add_argument(option)
-
-    
-driver = webdriver.Chrome(options = chrome_options)
 
 def update_token():
     """
@@ -66,16 +44,30 @@ def update_token():
     - requests.exceptions.RequestException: 如果HTTP请求更新token时出现问题。
     """
     try:
-        op = Options()
-        op.add_argument("--no-sandbox")
-        op.add_argument("--headless")
-        op.add_argument("--disable-gpu")
-        op.add_argument("--log-level=3")  # 设置日志级别为3，抑制错误信息
-        op.add_experimental_option("detach", True)
+        chrome_options = webdriver.ChromeOptions()
+        # Add your options as needed
+        options = [
+            # Define window size here
+            "--window-size=1200,1200",
+            "--ignore-certificate-errors",
+            "--log-level=3",
+            # "--headless",
+            # "--disable-gpu",
+            # "--window-size=1920,1200",
+            # "--ignore-certificate-errors",
+            # "--disable-extensions",
+            # "--no-sandbox",
+            # "--disable-dev-shm-usage",
+            #'--remote-debugging-port=9222'
+        ]
+
+        for option in options:
+            chrome_options.add_argument(option)
+
+        driver = webdriver.Chrome(options=chrome_options)
 
         se = Service("chromedriver.exe")
-        driver = webdriver.Chrome(service=se, options=op)
-        driver.maximize_window()
+
         driver.get("https://results-service.ielts.org/")
 
         # 输入邮箱
@@ -108,6 +100,7 @@ def update_token():
             match = re.search(pattern, driver.current_url)
             if match:
                 id_token = match.group(1)
+                print(id_token)
                 break
             time.sleep(0.1)
         else:
@@ -118,5 +111,5 @@ def update_token():
     finally:
         driver.quit()
 
-update_token()
 
+update_token()
