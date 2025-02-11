@@ -66,8 +66,6 @@ def update_token():
 
         driver = webdriver.Chrome(options=chrome_options)
 
-        se = Service("chromedriver.exe")
-
         driver.get("https://results-service.ielts.org/")
 
         # 输入邮箱
@@ -100,7 +98,7 @@ def update_token():
             match = re.search(pattern, driver.current_url)
             if match:
                 id_token = match.group(1)
-                print(id_token)
+                logging.info(f"token={id_token}")
                 break
             time.sleep(0.1)
         else:
