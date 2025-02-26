@@ -1,1 +1,7 @@
 
+2025-02-26 02:45:57,120 - INFO - Downloading chromedriver (133.0.6943.141)...
+2025-02-26 02:46:16,474 - INFO - Email entered.
+2025-02-26 02:46:16,658 - INFO - Password entered.
+2025-02-26 02:46:16,726 - INFO - Submit button clicked.
+2025-02-26 02:46:16,726 - INFO - Waiting for token in URL...
+2025-02-26 02:46:19,057 - INFO - Token updated successfully.
