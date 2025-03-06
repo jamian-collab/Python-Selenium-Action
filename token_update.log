@@ -617,3 +617,9 @@
 2025-03-06 14:12:03,708 - INFO - Submit button clicked.
 2025-03-06 14:12:03,708 - INFO - Waiting for token in URL...
 2025-03-06 14:12:06,105 - INFO - Token updated successfully.
+2025-03-06 16:14:19,361 - INFO - Downloading chromedriver (133.0.6943.141)...
+2025-03-06 16:14:48,160 - INFO - Email entered.
+2025-03-06 16:14:48,424 - INFO - Password entered.
+2025-03-06 16:14:48,533 - INFO - Submit button clicked.
+2025-03-06 16:14:48,533 - INFO - Waiting for token in URL...
+2025-03-06 16:14:50,233 - INFO - Token updated successfully.
