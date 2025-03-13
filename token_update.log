@@ -23,3 +23,9 @@
 2025-03-13 18:16:17,869 - INFO - Submit button clicked.
 2025-03-13 18:16:17,869 - INFO - Waiting for token in URL...
 2025-03-13 18:16:20,053 - INFO - Token updated successfully.
+2025-03-13 20:13:14,244 - INFO - Downloading chromedriver (134.0.6998.88)...
+2025-03-13 20:13:42,247 - INFO - Email entered.
+2025-03-13 20:13:42,530 - INFO - Password entered.
+2025-03-13 20:13:42,634 - INFO - Submit button clicked.
+2025-03-13 20:13:42,634 - INFO - Waiting for token in URL...
+2025-03-13 20:13:44,620 - INFO - Token updated successfully.
