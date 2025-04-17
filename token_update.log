@@ -683,3 +683,6 @@
 2025-04-17 20:13:30,443 - INFO - Submit button clicked.
 2025-04-17 20:13:30,444 - INFO - Waiting for token in URL...
 2025-04-17 20:18:30,543 - ERROR - Error in update_token: Token retrieval timed out.
+2025-04-17 22:11:21,340 - INFO - Downloading chromedriver (135.0.7049.95)...
+2025-04-17 22:14:17,031 - ERROR - Error in update_token: HTTPConnectionPool(host='localhost', port=39573): Read timed out. (read timeout=120)
+2025-04-17 22:16:17,052 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPConnectionPool(host='localhost', port=39573): Read timed out. (read timeout=120)")': /session/7c7123073bc796082da7348811e437dc
