@@ -875,3 +875,9 @@
 2025-04-20 14:11:13,590 - INFO - Submit button clicked.
 2025-04-20 14:11:13,590 - INFO - Waiting for token in URL...
 2025-04-20 14:16:13,597 - ERROR - Error in update_token: Token retrieval timed out.
+2025-04-20 16:13:13,403 - INFO - Downloading chromedriver (135.0.7049.95)...
+2025-04-20 16:13:28,285 - INFO - Email entered.
+2025-04-20 16:13:28,379 - INFO - Password entered.
+2025-04-20 16:13:28,474 - INFO - Submit button clicked.
+2025-04-20 16:13:28,474 - INFO - Waiting for token in URL...
+2025-04-20 16:18:28,513 - ERROR - Error in update_token: Token retrieval timed out.
