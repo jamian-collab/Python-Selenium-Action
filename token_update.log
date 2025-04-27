@@ -1,1 +1,7 @@
 
+2025-04-27 02:52:52,630 - INFO - Downloading chromedriver (135.0.7049.114)...
+2025-04-27 02:53:24,194 - INFO - Email entered.
+2025-04-27 02:53:24,558 - INFO - Password entered.
+2025-04-27 02:53:24,650 - INFO - Submit button clicked.
+2025-04-27 02:53:24,650 - INFO - Waiting for token in URL...
+2025-04-27 02:53:27,081 - ERROR - Failed to update token. Status code: 436
