@@ -17,3 +17,9 @@
 2025-04-27 04:17:19,111 - INFO - Submit button clicked.
 2025-04-27 04:17:19,111 - INFO - Waiting for token in URL...
 2025-04-27 04:22:19,190 - ERROR - Error in update_token: Token retrieval timed out.
+2025-04-27 04:29:26,732 - INFO - Downloading chromedriver (135.0.7049.114)...
+2025-04-27 04:29:51,481 - INFO - Email entered.
+2025-04-27 04:29:51,648 - INFO - Password entered.
+2025-04-27 04:29:51,776 - INFO - Submit button clicked.
+2025-04-27 04:29:51,776 - INFO - Waiting for token in URL...
+2025-04-27 04:29:53,932 - ERROR - Failed to update token. Status code: 436
