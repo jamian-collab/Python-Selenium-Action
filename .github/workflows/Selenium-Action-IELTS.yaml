@@ -21,12 +21,12 @@ jobs:
         
        # Need to fetch reqs if needed
       - name: Installing all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay requests
+        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay requests selenium-wire
       - name: Install xvfb
         run: sudo apt-get install xvfb
 
       - name: Running the Python script
-        run: python Selenium-Action-IELTS.py ${{ secrets.EMAIL }} ${{ secrets.PASSWORD }} ${{ secrets.MYSITE }}
+        run: python Selenium-Action-IELTS.py ${{ secrets.EMAIL }} ${{ secrets.PASSWORD }} ${{ secrets.MYSITE }} ${{ secrets.FROM_EMAIL }} ${{ secrets.FROM_PWD }} ${{ secrets.TO_EMAIL }}
         
       - name: Commit and Push The Results From Python Selenium Action
         run: |
