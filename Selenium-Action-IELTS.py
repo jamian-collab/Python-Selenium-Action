@@ -29,6 +29,7 @@ chromedriver_autoinstaller.install()  # Check if the current version of chromedr
 # and if it doesn't exist, download it automatically,
 # then add chromedriver to path
 
+logging.getLogger("seleniumwire").setLevel(logging.WARNING)
 
 def send_email(subject, body):
     from_email = sys.argv[4]
