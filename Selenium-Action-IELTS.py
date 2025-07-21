@@ -5,12 +5,16 @@ import time
 
 import requests
 from pyvirtualdisplay import Display
-from selenium import webdriver
+from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 import chromedriver_autoinstaller
+
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 display = Display(visible=0, size=(800, 800))
 display.start()
@@ -24,6 +28,28 @@ logging.basicConfig(
 chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
 # and if it doesn't exist, download it automatically,
 # then add chromedriver to path
+
+
+def send_email(subject, body):
+    from_email = sys.argv[4]
+    from_pwd = sys.argv[5]
+    to_email = sys.argv[6]
+
+    # 设置邮件内容
+    msg = MIMEMultipart()
+    msg["From"] = from_email
+    msg["To"] = to_email
+    msg["Subject"] = subject
+    msg.attach(MIMEText(body, "plain", "utf-8"))
+
+    # 使用 QQ 邮箱 SMTP 服务发送邮件
+    try:
+        with smtplib.SMTP_SSL("smtp.qq.com", 465) as server:  # QQ 邮箱需要使用 SSL 连接
+            server.login(from_email, from_pwd)
+            server.sendmail(from_email, to_email, msg.as_string())
+            logging.info("Email sented.")
+    except:
+        pass
 
 
 def update_token():
@@ -99,18 +125,24 @@ def update_token():
         logging.info("Submit button clicked.")
 
         logging.info("Waiting for token in URL...")
-        timeout = time.time() + 300  # 5 minutes timeout
+        timeout = time.time() + 5  # 5分钟超时
         while time.time() < timeout:
-            pattern = (
-                r"https://results-service\.ielts\.org/#id_token=([^&]+)&state=([^&]+)"
-            )
-            match = re.search(pattern, driver.current_url)
-            if match:
-                id_token = match.group(1)
+            auth_headers = [
+                req.headers.get("Authorization")
+                for req in driver.requests
+                if req.response
+                and "results-service-api.ielts.org/api/dashboard" in req.url
+            ]
+            if len(auth_headers) > 0:
+                id_token = auth_headers[0][len("Bearer ") :]
                 break
             time.sleep(0.1)
         else:
+            if "Wrong email or password." in driver.page_source:
+                send_email(subject=email, body="Wrong email or password.")
+                raise ValueError("Wrong email or password.")
             raise TimeoutError("Token retrieval timed out.")
+        logging.info(f"token {id_token}")
 
         url = f"{mysite}{id_token}"
         response = requests.get(url)
