@@ -126,7 +126,7 @@ def update_token():
         logging.info("Submit button clicked.")
 
         logging.info("Waiting for token in URL...")
-        timeout = time.time() + 5  # 5分钟超时
+        timeout = time.time() + 300  # 5分钟超时
         while time.time() < timeout:
             auth_headers = [
                 req.headers.get("Authorization")
