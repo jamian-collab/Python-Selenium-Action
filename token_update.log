@@ -978,3 +978,10 @@
 2025-08-05 18:43:05,071 - INFO - Waiting for token in URL...
 2025-08-05 18:48:08,405 - INFO - Email sented.
 2025-08-05 18:48:08,612 - ERROR - Error in update_token: Wrong email or password.
+2025-08-05 20:28:57,177 - INFO - Downloading chromedriver (138.0.7204.183)...
+2025-08-05 20:29:19,170 - INFO - Email entered.
+2025-08-05 20:29:19,345 - INFO - Password entered.
+2025-08-05 20:29:19,510 - INFO - Submit button clicked.
+2025-08-05 20:29:19,510 - INFO - Waiting for token in URL...
+2025-08-05 20:34:22,259 - INFO - Email sented.
+2025-08-05 20:34:22,459 - ERROR - Error in update_token: Wrong email or password.
