@@ -971,3 +971,10 @@
 2025-08-05 16:30:20,607 - INFO - Waiting for token in URL...
 2025-08-05 16:35:23,963 - INFO - Email sented.
 2025-08-05 16:35:24,175 - ERROR - Error in update_token: Wrong email or password.
+2025-08-05 18:42:43,915 - INFO - Downloading chromedriver (138.0.7204.183)...
+2025-08-05 18:43:04,807 - INFO - Email entered.
+2025-08-05 18:43:04,935 - INFO - Password entered.
+2025-08-05 18:43:05,071 - INFO - Submit button clicked.
+2025-08-05 18:43:05,071 - INFO - Waiting for token in URL...
+2025-08-05 18:48:08,405 - INFO - Email sented.
+2025-08-05 18:48:08,612 - ERROR - Error in update_token: Wrong email or password.
